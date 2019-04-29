@@ -1,6 +1,6 @@
 ### App Tech stack
 - firebase
-- React [create-react-app][ES-lint]
+- React [create-react-app]
 - Redux
 - TypeScript
 - Sass
