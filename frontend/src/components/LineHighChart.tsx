@@ -4,37 +4,40 @@ import HighchartsReact from 'highcharts-react-official';
 import { IPoints } from '../reducers/pointer.reducer';
 
 interface ILineHighChartProps {
-  chartData: IPoints[]
+  chartData: IPoints[];
 }
 
-export default class LineHighChart extends React.Component<ILineHighChartProps, {}> {
-  componentDidMount() {
-
-  }
-
+export default class LineHighChart extends React.Component<
+  ILineHighChartProps,
+  {}
+> {
   render() {
     const { chartData } = this.props;
-    const newData = (chartData || []).map(v => {
-      return [new Date(v.x).getTime(), v.y];
-    }).sort((a, b) => {
-      return a[0] - b[0]
-    });
-    const data = newData;
+    const data = (chartData || [])
+      .map(v => {
+        return [new Date(v.x).getTime() || 0, v.y || 0];
+      })
+      .sort((a, b) => {
+        return a[0] - b[0];
+      });
 
     const config: any = {
       rangeSelector: {
-        selected: 1
+        inputEnabled: false,
+        selected: 1,
       },
       title: {
-        text: 'Demo Cgart'
+        text: 'Demo Cgart',
       },
-      series: [{
-        name: 'value',
-        data: data,
-        tooltip: {
-          valueDecimals: 2
-        }
-      }]
+      series: [
+        {
+          name: 'value',
+          data: data,
+          tooltip: {
+            valueDecimals: 2,
+          },
+        },
+      ],
     };
     return (
       <HighchartsReact
