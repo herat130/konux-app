@@ -29,6 +29,12 @@ export default class LineHighChart extends React.Component<
       title: {
         text: 'Demo Cgart',
       },
+      navigator: {
+        enabled: true,
+      },
+      tooltip: {
+        xDateFormat: '%Y-%m-%d',
+      },
       series: [
         {
           name: 'value',

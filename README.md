@@ -3,6 +3,7 @@
 - React [create-react-app]
 - Redux
 - TypeScript
+- TSLint
 - Sass
 - thunk
 - jest
