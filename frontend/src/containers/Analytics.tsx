@@ -1,10 +1,11 @@
 import React from 'react';
-import Chart from '../components/Chart';
+// import Chart from '../components/Chart';
 import AddPointer from '../components/AddPointer';
 import { getAllPoints, addPoints } from '../actions/pointer.action';
 import { connect } from 'react-redux';
 import { IPointReducer, IAction } from '../reducers/pointer.reducer';
 import { Dispatch } from 'redux';
+import LineHighChart from '../components/LineHighChart';
 
 interface IAnalyticsMapStateToProps extends IPointReducer { }
 
@@ -20,7 +21,7 @@ interface IAnalyticsMapStateToDispatch {
 
 type AnalyticsProps = IAnalyticsMapStateToProps & IAnalyticsMapStateToDispatch;
 
-class Analytics extends React.Component<AnalyticsProps, {}> {
+export class Analytics extends React.Component<AnalyticsProps, {}> {
   componentDidMount() {
     this.props.getPointers();
   }
@@ -31,18 +32,14 @@ class Analytics extends React.Component<AnalyticsProps, {}> {
 
   render() {
     const { allPoints, loading } = this.props;
-    const width = 1000,
-      height = 350;
     if (loading) {
-      return <p>Loading Chart...</p>
+      return <p className="loading">Loading Chart...</p>
     }
 
     return (
       <React.Fragment>
-        {(allPoints || []).length > 0 ? <Chart
+        {(allPoints || []).length > 0 ? <LineHighChart
           chartData={allPoints}
-          elementWidth={width}
-          elementHeight={height}
         /> : false}
         <AddPointer addPointer={this.addPointer} />
       </React.Fragment>

@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 
 import '../assets/styles/linechart.scss';
 import { IPoints } from '../reducers/pointer.reducer';
+
 // https://github.com/DylanMoz/dylanmoz.github.io/blob/source/src/pages/trello/TrelloGraph.js
 
 interface ChartDefaultProps {
@@ -23,31 +24,28 @@ type IChartProps = ISelfChartProps & ChartDefaultProps;
 
 class Chart extends Component<IChartProps, IChartState> {
 
-  defaultProps: ChartDefaultProps = {
+  static defaultProps: ChartDefaultProps = {
     margin: { top: 30, right: 50, bottom: 50, left: 50 }
   };
   state = {
     data: [],
   };
 
-  private x: any;
-  private y: any;
-  private xaxis: React.RefObject<SVGAElement>;
-  private yaxis: React.RefObject<SVGAElement>;
+  x: any;
+  y: any;
+  xaxis: React.RefObject<SVGAElement> =React.createRef();
+  yaxis: React.RefObject<SVGAElement>=React.createRef();
 
   constructor(props: IChartProps) {
     super(props);
-
     const { elementWidth, elementHeight, margin } = this.props;
-
     this.x = d3
       .scaleTime()
       .range([0, elementWidth - margin.left - margin.right]);
     this.y = d3
       .scaleLinear()
       .range([elementHeight - margin.top - margin.bottom, 0]);
-    this.xaxis = React.createRef();
-    this.yaxis = React.createRef();
+    
   }
 
   componentDidMount() {
@@ -80,20 +78,20 @@ class Chart extends Component<IChartProps, IChartState> {
     this.setState({ data: data });
   }
 
-  xAxis() {
+  get xAxis() {
     return d3.axisBottom(this.x).ticks(5);
   }
 
-  yAxis() {
+  get yAxis() {
     return d3.axisLeft(this.y).ticks(5);
   }
 
-  drawXAxis() {
-    return d3.select((this.xaxis as any)).call(this.xAxis);
+  drawXAxis(): any {
+    d3.select((this.xaxis as any)).call(this.xAxis);
   }
 
-  drawYAxis() {
-    return d3.select((this.yaxis as any)).call(this.yAxis);
+  drawYAxis(): any {
+    d3.select((this.yaxis as any)).call(this.yAxis);
   }
 
   get line() {
@@ -108,31 +106,33 @@ class Chart extends Component<IChartProps, IChartState> {
     if (data.length <= 0) {
       return <p>No Path</p>
     }
-    return <path className="line" d={this.line(data) as string} />;
+    return <path className="line" d={this.line(data) as any} />;
   }
 
   render() {
     const { margin, elementWidth, elementHeight } = this.props;
     const { data } = this.state;
     return (
-      <svg width={elementWidth} height={elementHeight}>
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          {this.state.data ? this.path() : null}
+      <div className="column-12">
+        <svg width={elementWidth} height={elementHeight}>
+          <g transform={`translate(${margin.left}, ${margin.top})`}>
+            {this.state.data ? this.path() : null}
 
-          <g
-            ref={this.xaxis}
-            className="x axis"
-            transform={`translate(0, ${elementHeight -
-              margin.top -
-              margin.bottom})`}>
-            {data ? this.drawXAxis() : false}
-          </g>
+            <g
+              ref={this.xaxis}
+              className="x axis"
+              transform={`translate(0, ${elementHeight -
+                margin.top -
+                margin.bottom})`}>
+              {data ? (this.drawXAxis() as any) : false}
+            </g>
 
-          <g ref={this.yaxis} className="y axis">
-            {data ? this.drawYAxis() : false}
+            <g ref={this.yaxis} className="y axis">
+              {data ? (this.drawYAxis() as any) : false}
+            </g>
           </g>
-        </g>
-      </svg>
+        </svg>
+      </div>
     );
   }
 }

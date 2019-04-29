@@ -16,7 +16,7 @@ interface IResult {
   status: string;
 }
 
-export const getAllPoints = (): Promise<any> => {
+export const getAllPoints = (): Promise<IAction> => {
   return fetchWrapper(`${LOCATION_API}/fetch`)
     .then((result: IResult) => {
       return responseSuccess(result.data);
@@ -26,7 +26,7 @@ export const getAllPoints = (): Promise<any> => {
     });
 };
 
-export const addPoints = (pointerObj: IPointerObj): Promise<any> => {
+export const addPoints = (pointerObj: IPointerObj): Promise<IAction> => {
   return fetchWrapper(`${LOCATION_API}/add`, 'post', pointerObj)
     .then((result: IResult) => {
       if (chkAndDisplayMsg(result.status, 'add')) {
@@ -46,32 +46,32 @@ const chkAndDisplayMsg = (status: string, operation = 'add') => {
     toastr.success(`${STATUS_MSG_ENUM[status]} ${operation}`, 'Success');
     return true;
   } else {
-    // toastr.error(`${STATUS_MSG_ENUM[status]}`, 'Error');
+    toastr.error(`${STATUS_MSG_ENUM[status]}`, 'Error');
     return false;
   }
 };
 
-const addSuccess = (pointerObj: IPointerObj) => {
+const addSuccess = (pointerObj: IPointerObj): IAction => {
   return {
     type: ADD_POINTS_SUCCESS,
     payload: { x: pointerObj.date, y: pointerObj.value },
   };
 };
 
-const responseSuccess = (result: IPoints[]) => {
+export const responseSuccess = (result: IPoints[]): IAction => {
   return {
     type: FETCH_POINTS_SUCCESS,
     payload: { result },
   };
 };
 
-const responseFail = () => {
+const responseFail = (): IAction => {
   return {
     type: FETCH_POINTS_FAIL,
   };
 };
 
-export const fetchStart = () => {
+export const fetchStart = (): IAction => {
   return {
     type: FETCH_POINTS_START,
   };

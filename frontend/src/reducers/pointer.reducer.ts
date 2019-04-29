@@ -24,7 +24,7 @@ export const initialState: IPointReducer = {
 
 export interface IAction {
   type: string;
-  payload: any;
+  payload?: any;
 }
 
 export default function (state: IPointReducer = initialState, action: IAction): IPointReducer {

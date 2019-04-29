@@ -36,14 +36,22 @@ export default class AddPointer extends React.Component<IAddPointerProps, IAddPo
   };
 
   render() {
-    const { value } = this.state;
+    const { value, date } = this.state;
     return (
-      <div>
-        <DateTimePicker onChange={this.onChange} value={this.state.date} />
-        <input type="text" onChange={this.chageValue} value={value} />
-        <button type="submit" onClick={this.submitPointer}>
-          Submit
+      <div className="column-12">
+        <div className="column-12">
+          <label className="column-6">DATE</label>
+          <DateTimePicker className="" onChange={this.onChange} value={date} />
+        </div>
+        <div className="column-12">
+          <label className="column-6">VALUE</label>
+          <input type="text" className='pointerValue' onChange={this.chageValue} value={value} />
+        </div>
+        <div className="column-12">
+          <button type="submit" className="btn btn-primary column-2" onClick={this.submitPointer}>
+            Submit
         </button>
+        </div>
       </div>
     );
   }

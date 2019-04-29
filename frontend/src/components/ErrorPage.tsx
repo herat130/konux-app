@@ -7,7 +7,7 @@ import '../assets/styles/error.scss';
  * So that user get an intimation of issue in Application
  */
 
-export default function ErrorPage({ ...props }) {
+export default function ErrorPage() {
   return (
     <div className="row">
       <div className="text-center errorPage column-12">

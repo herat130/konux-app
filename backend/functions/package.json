@@ -3,16 +3,16 @@
   "description": "Cloud Functions for Firebase",
   "scripts": {
     "lint": "eslint .",
+    "client": "cd ../../frontend && npm run start",
     "serve": "node_modules/.bin/firebase serve --only functions",
     "shell": "node_modules/.bin/firebase functions:shell",
-    "start": "npm run shell",
     "deploy": "node_modules/.bin/firebase deploy --only functions",
-    "logs": "firebase functions:log"
+    "logs": "firebase functions:log",
+    "start": "concurrently --kill-others-on-fail \"npm run serve\" \"npm run client\""
   },
   "dependencies": {
     "axios": "^0.18.0",
     "compression": "^1.7.4",
-    "concurrently": "^4.1.0",
     "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
@@ -22,6 +22,7 @@
     "helmet": "^3.16.0"
   },
   "devDependencies": {
+    "concurrently": "^4.1.0",
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
     "firebase-tools": "^6.6.0"
