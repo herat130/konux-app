@@ -30,10 +30,10 @@
 - while submitting an app i have combine both frontend and backend togather for easy in bootstrap the app
 
 #### Frontend:
-- https://medwing-front.firebaseapp.com/findplaces
+- https://konux-11fa5.firebaseapp.com/analytics
 
 #### API:
-- https://us-central1-medwing-server.cloudfunctions.net/app/
+- https://us-central1-konux-11fa5.cloudfunctions.net/app
 
 ## test 
 - cd frontend
