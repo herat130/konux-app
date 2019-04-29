@@ -1,0 +1,70 @@
+/*
+ This styles come by default by every `create-react-app`. We tweaked them a bit to match
+ the Hello Fresh colors. Feel free to remove or modify this file.
+ */
+ 
+ @import "variables";
+
+ a button {
+   cursor: pointer;
+ }
+ 
+ .App {
+   text-align: center;
+   background-color: goldenrod;
+   background-color: $background-color;
+ }
+ 
+ .App-logo {
+   height: 80px;
+ }
+ 
+ .App-header {
+   color: $theme-color;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 2.5em;
+   width: 70%;
+   font-style: italic;
+ }
+ .launch-app {
+   background: linear-gradient(to right,$theme-hover-color 50%, $theme-color 50%);
+   background-size: 200% 100%;
+   background-position: right bottom;
+   transition: all 0.5s ease-in;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 5%;
+   padding:10px;
+   font-size: 0.7em;
+ }
+ .launch-app:hover {
+   background-position: left bottom;
+ }
+ 
+ .App-title {
+   font-size: 1.5em;
+ }
+ 
+ .App-intro {
+   font-size: large;
+ }
+ 
+ .header {
+   width: 100%;
+   background-color: $theme-color;
+   color:#fff;
+   .logo{
+     font-size: 2em;
+     color:#fff; 
+     text-decoration: none; 
+   }
+ }
+ .footer {
+   position: fixed;
+   bottom:0px;
+   width: 100%;
+   background-color: $theme-color;
+ }

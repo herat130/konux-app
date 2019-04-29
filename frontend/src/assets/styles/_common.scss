@@ -1,0 +1,92 @@
+@import "variables";
+
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+%clearfix {
+  *zoom: 1;
+  &:before, 
+  &:after {
+      content: " ";
+      display: table;
+  }
+  &:after {
+      clear: both;
+  }
+}
+
+*,
+*:after,
+*:before {
+  margin: 0;
+  padding: 0;
+  @include border-box;
+}
+
+.wrapper {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.row {
+  @extend %clearfix;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width:100%;
+}
+
+[class*="column-"] {
+  padding: 1em;
+  width: 100%;
+  min-height: 1px;
+}
+
+@media #{$breakpoint-medium} {
+  .wrapper {
+    width: 100%;
+    max-width: $grid-max-width;
+  }
+  @for $i from 1 through $grid-columns {
+    .column-#{$i} {
+      width: 100% / $grid-columns * $i;
+    }
+  }
+}
+
+.btn{  
+  padding:0.8em;
+  border-radius: 3%;
+  font-style: italic;
+  cursor: pointer;
+}
+.btn-primary{
+  border:1px solid $theme-color;
+  background-color:$theme-color;
+  color:#fff;
+  font-weight: bold;  
+}
+input[type='text']{
+  color:$theme-color;
+  font-size: 1em;
+  padding:0.5em;
+  border:1px solid $theme-hover-color;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+a{
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "konux-11fa5"
+  },
+  "rewrite":[{
+    "source":"**",
+    "function":"app"
+  }]
+}
