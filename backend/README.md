@@ -1,1 +1,0 @@
-# konux-backend

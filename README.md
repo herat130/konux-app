@@ -47,9 +47,3 @@
 - firebase hosting with ci / cd pipeline in gitlab
 - display toastr messages on success and faliure.
 - responsive app.
-
-### API feature
-- fetch all place
-- add new place
-- update new place
-- delete new place
